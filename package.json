@@ -3,15 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.1.2",
+    "chance": "^1.0.16",
+    "concurrently": "^4.0.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "fs": "^0.0.1-security",
+    "nodemon": "^1.18.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-redux": "^5.0.7",
+    "react-scripts": "2.0.4",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"node server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "server": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

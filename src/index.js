@@ -3,16 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configureSocket from './socket';
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { createStore } from 'redux';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
-import rootSaga from './sagas';
-
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(rootSaga);
+const store = createStore(reducer);
 
 // setup socket connection
 export const socket = configureSocket(store.dispatch);

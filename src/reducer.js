@@ -11,16 +11,14 @@ const reducer = (
   },
   action
 ) => {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case 'PITCH_IN':
       state = { ...state, pot: ++state.pot, mode: 'pitch' };
-      socket !== undefined && socket.emit('UPDATE_POT', state);
+      socket && socket.emit('UPDATE_POT', state);
       break;
     case 'GET_ONE':
       state = { ...state, pot: --state.pot, mode: 'get' };
-      socket !== undefined && socket.emit('UPDATE_POT', state);
+      socket && socket.emit('UPDATE_POT', state);
       break;
     case 'DELIVER_UPDATED_POT_TO_REDUCER':
       state = { ...state, pot: action.updatedPot.pot };

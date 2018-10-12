@@ -22,10 +22,21 @@ class App extends Component {
 
   closeSnackbar = () => this.props.dispatch({ type: 'ANOTHER_ONE_PITCHED_IN' });
 
+  getOne = () => {
+    const { dispatch, name } = this.props;
+    dispatch({ type: 'GET_ONE' });
+    sendGetOneToServer(name);
+  };
+
+  pitchIn = () => {
+    const { dispatch, name } = this.props;
+    dispatch({ type: 'PITCH_IN' });
+    sendPitchInToServer(name);
+  };
+
   render() {
     const {
       pot,
-      dispatch,
       name,
       names,
       snackbarIsOpen,
@@ -38,26 +49,12 @@ class App extends Component {
           <h1>{pot}</h1>
         </Grid>
         <Grid style={{ textAlign: 'right', padding: '10px' }} item xs={6}>
-          <Button
-            onClick={() => {
-              dispatch({ type: 'PITCH_IN' });
-              sendPitchInToServer(name);
-            }}
-            variant="raised"
-            color="primary"
-          >
+          <Button onClick={this.pitchIn} variant="raised" color="primary">
             pitch in!
           </Button>
         </Grid>
         <Grid style={{ textAlign: 'left', padding: '10px' }} item xs={6}>
-          <Button
-            onClick={() => {
-              dispatch({ type: 'GET_ONE' });
-              sendGetOneToServer(name);
-            }}
-            variant="raised"
-            color="secondary"
-          >
+          <Button onClick={this.getOne} variant="raised" color="secondary">
             get one!
           </Button>
         </Grid>
@@ -75,14 +72,18 @@ class App extends Component {
             <span style={{ color: 'red' }}>{name}</span>
             <div style={{ padding: '10px' }}>
               Other members:
-              {names.map(member => (
-                <div
-                  style={{ display: name === member && 'none' }}
-                  key={member}
-                >
-                  {member}
-                </div>
-              ))}
+              {names.length <= 1 ? (
+                <div style={{ color: 'red' }}>No other members yet</div>
+              ) : (
+                names.map(member => (
+                  <div
+                    style={{ display: name === member && 'none' }}
+                    key={member}
+                  >
+                    {member}
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </Grid>

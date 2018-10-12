@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:8000');
+
 const configureSocket = dispatch => {
   socket.on('connect', () => {
     console.log('connected');
@@ -21,7 +22,7 @@ const configureSocket = dispatch => {
   return socket;
 };
 
-export const getCurrentPot = dispatch => socket.emit('GET_CURRENT_POT');
+export const getCurrentPot = () => socket.emit('GET_CURRENT_POT');
 
 export const sendNameToServer = name =>
   socket.emit('SEND_NAME_TO_SERVER', name);
